@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Providers;
+
+use App\View\Components\FlashMessages;
 use Illuminate\Pagination\Paginator;
 
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use FlashMessages;
     /**
      * Register any application services.
      */
@@ -20,6 +23,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        view()->composer('partials.messages', function ($view) {
+
+            $messages = self::messages();
+  
+            return $view->with('messages', $messages);
+        });
+
+        
         Paginator::useBootstrapFive();
     }
 }

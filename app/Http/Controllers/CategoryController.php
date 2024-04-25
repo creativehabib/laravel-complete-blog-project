@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Meta;
+use App\View\Components\FlashMessages;
 use Throwable;
 
 class CategoryController extends Controller
 {
+    use FlashMessages;
     /**
      * Display a listing of the resource.
      */
@@ -36,7 +37,8 @@ class CategoryController extends Controller
         try{
             $category = (new Category())->storeCategory($request);
             (new Meta())->store_meta($request, $category);
-            return redirect()->route('category.index')->with('success','Category created successfully');
+            self::message('success', 'Category created successfully.');
+            return redirect()->route('category.index');
         }catch(Throwable $throwable){
 
         }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
 <div class="col-md-12">
     <div class="card">
@@ -23,7 +23,7 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$post->post_title}}</td>
                         <td>{{$post->post_description}}</td>
-                        <td><img src="{{asset('uploads/media/'.$post->post_image)}}" alt="" class="img-thumbnail"></td>
+                        <td><img src="{{asset('uploads/media/'.$post->post_image)}}" alt="" class="img-thumbnail ratio ratio-1x1"></td>
                         <td>
                             <form method="POST" action="{{route('post.destroy',$post->id)}}">
                                 <a href="{{route('post.show',$post->id)}}" class="btn btn-sm btn-info text-white"><i class="fa-solid fa-eye"></i></a>
