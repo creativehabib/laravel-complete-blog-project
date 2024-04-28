@@ -15,26 +15,40 @@ class Meta extends Model
     protected $guarded = [];
     public const IMAGE_UPLOAD_PATH = 'uploads/media/';
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return mixed
+     */
     public function store_meta(Request $request, Model $model) :mixed
     {
         return $model->meta()->create($this->prepareData($request));
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return mixed
+     */
     public function update_meta(Request $request, Model $model) :mixed
     {
         // return $model->meta()->updateOrCreate(['id'=> $model?->meta?->id],$this->prepareData($request, $model));
         return $model->meta()->update($this->prepareData($request, $model));
     }
 
-
+    /**
+     * @param Request $request
+     * @param Model|null $model
+     * @return array
+     */
     public function prepareData(Request $request, Model|null $model = null) :array
     {
         $data = [
             'meta_title'        => $request->input('meta_title'),
             'meta_description'  => $request->input('meta_description'),
-            
+
         ];
-       
+
         if ($request->hasFile('meta_image')){
             if($model && !empty($model?->meta?->meta_image)){
                 $imagePath = public_path(self::IMAGE_UPLOAD_PATH.$model->meta->meta_image);
@@ -61,7 +75,12 @@ class Meta extends Model
         return $data;
     }
 
-    final public function delete_meta(Model $model) {
+    /**
+     * @param Model $model
+     * @return void
+     */
+    final public function delete_meta(Model $model): void
+    {
         if(!empty($model->meta->meta_image)){
             $imagePath = public_path('uploads/media/'.$model->meta->meta_image);
             if(File::exists($imagePath)){
@@ -71,8 +90,11 @@ class Meta extends Model
         $model->meta()->delete();
     }
 
+    /**
+     * @return MorphTo
+     */
     public function metaable():MorphTo
     {
-        return $this->morphTo();    
+        return $this->morphTo();
     }
 }

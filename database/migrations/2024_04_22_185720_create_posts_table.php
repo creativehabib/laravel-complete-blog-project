@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('created_by_id')->nullable();
+            $table->unsignedBigInteger('updated_by_id')->nullable();
             $table->string('post_title');
+            $table->string('post_slug');
             $table->longText('post_description');
-            $table->boolean('is_publish');
+            $table->string('category_id')->nullable();
+            $table->boolean('is_publish')->nullable()->comment('1=active, 0=inactive');
             $table->string('post_image')->nullable();
             $table->timestamps();
         });

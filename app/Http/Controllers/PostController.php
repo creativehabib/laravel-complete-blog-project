@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -16,8 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $categories = (new Category())->get_category_list();
         $posts = (new Post())->get_post_list();
-        return view('modules.post.index',compact('posts'));
+        return view('modules.post.index',compact('posts','categories'));
     }
 
     /**
@@ -26,7 +28,9 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        return view('modules.post.create',compact('post'));
+        $category = new Category();
+        $categories = (new Category())->get_category_assoc();
+        return view('modules.post.create',compact('category','post','categories'));
     }
 
     /**
@@ -56,7 +60,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('modules.post.edit',compact('post'));
+        $categories = (new Category())->get_category_assoc();
+        return view('modules.post.edit',compact('post','categories'));
     }
 
     /**

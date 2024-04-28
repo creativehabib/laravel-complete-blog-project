@@ -24,13 +24,14 @@ class StorePostRequest extends FormRequest
         return [
 
             'post_title'        => ['required','string','unique:posts,post_title'],
+            'post_slug'         => ['required','string','unique:posts,post_slug'],
             'post_description'  => ['required','string','max:255'],
             'is_publish'        => ['required'],
-            'post_image'        => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
+            'post_image'        => ['nullable','image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
 
             'meta_title'        => ['required','string','unique:metas,meta_title'],
             'meta_description'  => ['required','string','max:255'],
-            'meta_image'        => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048']
+            'meta_image'        => ['nullable','image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048']
         ];
     }
 }
