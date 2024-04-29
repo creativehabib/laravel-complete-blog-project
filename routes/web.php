@@ -27,5 +27,5 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'],function (){
 require __DIR__.'/auth.php';
 
 Route::get('/{any}', function () {
-    return view('welcome');
+    return view('auth.login');
 })->where('any','.*');

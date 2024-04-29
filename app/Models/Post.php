@@ -32,7 +32,7 @@ class Post extends Model
      */
     final public function get_post_list(): LengthAwarePaginator
     {
-        return self::query()->paginate(2);
+        return self::query()->paginate(5);
     }
 
     /**
@@ -92,20 +92,13 @@ class Post extends Model
                 {
                     File::delete($destination);
                 }
-                $file = $request->file('post_image');
-                $extension = $file->getClientOriginalExtension();
-                $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
-                $filename = time().'-'.$oldName.'.'.$extension;
-                $file->move(self::IMAGE_UPLOAD_PATH, $filename);
-                $data['post_image'] = $filename;
-           }else{
-                $file = $request->file('post_image');
-                $extension = $file->getClientOriginalExtension();
-                $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
-                $filename = time().'-'.$oldName.'.'.$extension;
-                $file->move(self::IMAGE_UPLOAD_PATH, $filename);
-                $data['post_image'] = $filename;
            }
+            $file = $request->file('post_image');
+            $extension = $file->getClientOriginalExtension();
+            $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
+            $filename = time().'-'.$oldName.'.'.$extension;
+            $file->move(self::IMAGE_UPLOAD_PATH, $filename);
+            $data['post_image'] = $filename;
         }
         return $data;
     }

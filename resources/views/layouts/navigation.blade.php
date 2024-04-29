@@ -27,7 +27,7 @@
                 </button>
                 <!-- Dark mode switcher end -->
             </div>
-            <div class="flex items-center ms-3">
+            <div class="flex items-center ms-3 profile-dropdown">
               <div class="flex items-center">
                 <button type="button" class="inline-flex items-center bg-gray-100 rounded-md px-2 py-1 dark:bg-gray-800 focus:bg-gray-300 dark:focus:bg-gray-700 focus:outline-none transition ease-in-out duration-150" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>

@@ -33,7 +33,8 @@
             <tr>
                 <th scope="col" class="px-6 py-3">Serial</th>
                 <th scope="col" class="px-6 py-3">Category Name</th>
-                <th scope="col" class="px-6 py-3">Post Count</th>
+                <th scope="col" class="px-6 py-3 text-center">Post Count</th>
+                <th scope="col" class="px-6 py-3">Status</th>
                 <th scope="col" class="px-6 py-3">Updated by</th>
                 <th scope="col" class="px-6 py-3 text-center">Action</th>
             </tr>
@@ -49,7 +50,27 @@
                             <div class="font-normal text-gray-500 dark:text-zinc-100/80">{{$category->created_at->toDayDateTimeString()}}</div>
                         </div>
                     </td>
-                    <td class="px-6 py-4">{{ $category->post->count() }}</td>
+                    <td class="px-6 py-4 text-center">{{ $category->post->count() }}</td>
+                    <td class="px-6 py-4">
+
+                        <div class="relative inline-block">
+                            <input type="checkbox" id="status" name="status" class="peer relative w-11 h-6 p-px bg-gray-100 border-transparent text-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 disabled:opacity-50 disabled:pointer-events-none checked:bg-none checked:text-blue-600 checked:border-blue-600 focus:checked:border-blue-600 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500
+
+  before:inline-block before:size-5 before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-neutral-400 dark:checked:before:bg-blue-200" {{  ($category->status == 1 ? ' checked' : '') }}>
+                            <label for="status" class="sr-only">switch</label>
+                            <span class="peer-checked:text-white text-gray-500 size-5 absolute top-[3px] start-0.5 flex justify-center items-center pointer-events-none transition-colors ease-in-out duration-200 dark:text-neutral-500">
+    <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 6 6 18"></path>
+      <path d="m6 6 12 12"></path>
+    </svg>
+  </span>
+                            <span class="peer-checked:text-blue-600 text-gray-500 size-5 absolute top-[3px] end-0.5 flex justify-center items-center pointer-events-none transition-colors ease-in-out duration-200 dark:text-neutral-500">
+    <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </span>
+                        </div>
+                    </td>
                     <td class="px-6 py-4">{{$category->updated_at->toDayDateTimeString()}}</td>
                     <td class="px-6 py-4">
                         <form method="post" action="{{route('category.destroy',$category->id)}}">

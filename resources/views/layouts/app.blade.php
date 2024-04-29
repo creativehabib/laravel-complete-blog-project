@@ -49,7 +49,6 @@
     </head>
     <body class="font-sans antialiased">
         @include('layouts.navigation')
-
         @include('layouts.sidebar')
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

@@ -51,7 +51,7 @@ class Category extends Model
      */
     public function get_category_list(): LengthAwarePaginator
     {
-        return self::query()->with('post')->paginate(2);
+        return self::query()->with('post')->paginate(5);
     }
 
     /**
@@ -111,20 +111,13 @@ class Category extends Model
                     {
                         File::delete($destination);
                     }
-                    $file = $request->file('cat_image');
-                    $extension = $file->getClientOriginalExtension();
-                    $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
-                    $filename = time().'-'.$oldName.'.'.$extension;
-                    $file->move(self::IMAGE_UPLOAD_PATH, $filename);
-                    $data['cat_image'] = $filename;
-               }else{
-                    $file = $request->file('cat_image');
-                    $extension = $file->getClientOriginalExtension();
-                    $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
-                    $filename = time().'-'.$oldName.'.'.$extension;
-                    $file->move(self::IMAGE_UPLOAD_PATH, $filename);
-                    $data['cat_image'] = $filename;
                }
+                $file = $request->file('cat_image');
+                $extension = $file->getClientOriginalExtension();
+                $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
+                $filename = time().'-'.$oldName.'.'.$extension;
+                $file->move(self::IMAGE_UPLOAD_PATH, $filename);
+                $data['cat_image'] = $filename;
             }
             return $data;
     }

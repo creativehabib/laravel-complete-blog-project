@@ -47,3 +47,21 @@ themeToggleBtn.addEventListener('click', function() {
     }
 
 });
+
+
+// Add JavaScript to toggle dropdown on click
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all menu items with a submenu
+    const menuItemsWithSubmenu = document.querySelectorAll('.menu-item.menu-toggle');
+
+    // Add click event listener to each menu item
+    menuItemsWithSubmenu.forEach(function (menuItem) {
+        menuItem.addEventListener('click', function () {
+            // Toggle the 'open' class to the parent li element
+            this.parentNode.classList.toggle('open');
+        });
+    });
+});
+
+
+

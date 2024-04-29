@@ -56,21 +56,13 @@ class Meta extends Model
                 {
                     File::delete($imagePath);
                 }
-                $file = $request->file('meta_image');
-                $extension = $file->getClientOriginalExtension();
-                $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
-                $filename = time().'-'.$oldName.'.'.$extension;
-                $file->move(self::IMAGE_UPLOAD_PATH, $filename);
-                $data['meta_image'] = $filename;
-            }else{
-                $file = $request->file('meta_image');
-                $extension = $file->getClientOriginalExtension();
-                $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
-                $filename = time().'-'.$oldName.'.'.$extension;
-                $file->move(self::IMAGE_UPLOAD_PATH, $filename);
-                $data['meta_image'] = $filename;
             }
-            // return $data;
+            $file = $request->file('meta_image');
+            $extension = $file->getClientOriginalExtension();
+            $oldName = Str::slug(preg_replace('/\..+$/', '', $file->getClientOriginalName()));
+            $filename = time().'-'.$oldName.'.'.$extension;
+            $file->move(self::IMAGE_UPLOAD_PATH, $filename);
+            $data['meta_image'] = $filename;
         }
         return $data;
     }
