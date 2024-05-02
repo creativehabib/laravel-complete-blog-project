@@ -94,6 +94,7 @@ function upload_form() {
 
                     $("#upload-loader").hide();
                     $('#form-panel, .btn-list').hide();
+                    window.location.reload()
                     onSuccessMsg(msg);
 
                     // onMediaPaginationDataLoad();
@@ -112,7 +113,24 @@ function upload_form() {
 }
 
 function onMediaDelete(id) {
-    alert('Delete')
+    RecordId = id;
+    $.ajax({
+        type : 'POST',
+        url: window.location.origin + '/admin/onMediaDelete',
+        data: 'id='+RecordId,
+        success: function (response) {
+            const msgType = response.msgType;
+            const msg = response.msg;
+
+            if(msgType === "success"){
+                alert(RecordId+' Deleted')
+                window.location.reload()
+            }else{
+                // onErrorMsg(msg);
+            }
+        }
+    });
+
 }
 function onMediaModalView(id) {
 

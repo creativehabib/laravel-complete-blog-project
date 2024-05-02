@@ -132,6 +132,34 @@ class MediaController extends Controller
         return response()->json($res);
     }
 
+    public function onMediaDelete(Request $request)
+    {
+        $res = array();
+
+        $id = $request->id;
+
+        if($id != ''){
+
+            $datalist = Media::where('id', $id)->first();
+            $thumbnail = $datalist['media_file'];
+
+            if (file_exists(public_path('media/'.$thumbnail))) {
+                unlink(public_path('media/'.$thumbnail));
+            }
+
+            $response = Media::where('id', $id)->delete();
+            if($response){
+                $res['msgType'] = 'success';
+                $res['msg'] = __('Data Removed Successfully');
+            }else{
+                $res['msgType'] = 'error';
+                $res['msg'] = __('Data remove failed');
+            }
+        }
+
+        return response()->json($res);
+    }
+
     /**
      * Display the specified resource.
      */

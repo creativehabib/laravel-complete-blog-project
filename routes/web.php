@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth'],function (){
     Route::resource('media', MediaController::class);
     Route::post('/getMediaById', [MediaController::class, 'getMediaById'])->name('media.getMediaById');
     Route::post('/mediaUpdate', [MediaController::class, 'mediaUpdate'])->name('backend.mediaUpdate');
+    Route::post('/onMediaDelete', [MediaController::class, 'onMediaDelete'])->name('backend.onMediaDelete');
 
 //    Route::post('/getMediaById', [MediaController::class, 'getMediaById'])->name('getMediaById');
 //    Route::get('/', [MediaController::class, 'index'])->name('media.index');
