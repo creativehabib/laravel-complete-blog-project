@@ -58,7 +58,7 @@
                  <!-- Page Heading -->
                  @if (isset($header))
                      <header class="bg-white dark:bg-gray-800 rounded-md shadow">
-                         <div class="w-full px-4 sm:px-6 lg:px-8">
+                         <div class="w-full sm:px-6">
                              {{ $header }}
                          </div>
                      </header>
@@ -68,5 +68,7 @@
              </div>
           </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset('backend/js/media.js') }}"></script>
     </body>
 </html>

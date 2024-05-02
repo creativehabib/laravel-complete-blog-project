@@ -49,7 +49,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('modules.category.show', compact('category'));
+       return view('modules.category.show', compact('category'));
     }
 
     /**
