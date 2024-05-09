@@ -13,7 +13,6 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         <style>
             /* width */
             ::-webkit-scrollbar {
@@ -69,6 +68,7 @@
           </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset('backend/js/plugin/flowbite.min.js') }}"></script>
         <script src="{{ asset('backend/js/media.js') }}"></script>
     </body>
 </html>

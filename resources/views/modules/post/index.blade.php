@@ -41,17 +41,17 @@
             <tbody>
             @forelse ($posts as $post )
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4">{{$loop->iteration}}</th>
-                <td class="px-6 py-4 flex items-center">
+                <th scope="row" class="px-6 py-3">{{$loop->iteration}}</th>
+                <td class="px-6 py-3 flex items-center">
                     <img src="{{asset('uploads/media/'.$post->post_image)}}" alt="" class="w-10 h-10 rounded-md">
                     <div class="ml-3">
                         <div class="text-base font-semibold dark:text-gray-100">{{$post->post_title}}</div>
                         <div class="font-normal text-gray-500 dark:text-zinc-100/80">{{$post->created_at->toDayDateTimeString()}}</div>
                     </div>
                 </td>
-                <td class="px-6 py-4">{{$post->category->name}}</td>
-                <td class="px-6 py-4">{{$post->updated_at->toDayDateTimeString()}}</td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-3">{{$post->category->name}}</td>
+                <td class="px-6 py-3">{{$post->updated_at->toDayDateTimeString()}}</td>
+                <td class="px-6 py-3">
                     <form method="post" action="{{route('post.destroy',$post->id)}}">
                         <div class="text-center">
                             <a href="{{route('post.show',$post->id)}}" class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-[#FF9119] rounded-lg hover:bg-[#FF9119]/80 focus:outline-none dark:bg-[#FF9119] dark:hover:bg-[#FF9119]/80">View</a>

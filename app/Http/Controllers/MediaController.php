@@ -17,7 +17,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $media_datalist = Media::orderBy('id','desc')->paginate(5);
+        $media_datalist = Media::orderBy('id','desc')->paginate(8);
         return view('media.index',compact('media_datalist'));
     }
 
@@ -115,11 +115,10 @@ class MediaController extends Controller
         $title = $request->input('title');
         $alt_title = $request->input('alternative_text');
 
-        $data = array(
+        $data = [
             'media_title' => $title,
-            'media_alt' => $alt_title
-        );
-
+            'media_alt' => $alt_title,
+        ];
         $response = Media::where('id', $id)->update($data);
         if($response){
             $res['msgType'] = 'success';
@@ -135,18 +134,13 @@ class MediaController extends Controller
     public function onMediaDelete(Request $request)
     {
         $res = array();
-
         $id = $request->id;
-
         if($id != ''){
-
             $datalist = Media::where('id', $id)->first();
             $thumbnail = $datalist['media_file'];
-
             if (file_exists(public_path('media/'.$thumbnail))) {
                 unlink(public_path('media/'.$thumbnail));
             }
-
             $response = Media::where('id', $id)->delete();
             if($response){
                 $res['msgType'] = 'success';

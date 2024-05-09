@@ -16,15 +16,15 @@ $(function () {
     });
 
     $("#submit-form").on("click", function (e) {
-        // e.preventDefault();
+        e.preventDefault();
         onConfirmWhenAddEdit()
     });
 
-    $(document).on('click', '.pagination a', function(event){
-        event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
-        onPaginationDataLoad(page);
-    });
+    // $(document).on('click', '.pagination a', function(event){
+    //     event.preventDefault();
+    //     var page = $(this).attr('href').split('page=')[1];
+    //     onPaginationDataLoad(page);
+    // });
 
 });
 
@@ -45,14 +45,10 @@ function onConfirmWhenAddEdit() {
         url: window.location.origin + '/admin/mediaUpdate',
         data: $('#DataEntry_formId').serialize(),
         success: function (response) {
-            const msgType = response.msgType;
-            const msg = response.msg;
-
-            if (msgType === "success") {
-                $('#media_modal_view').modal('hide');
-                // onSuccessMsg(msg);
+            if (response.msgType === "success") {
+                alert(response.msg)
             } else {
-                // onErrorMsg(msg);
+
             }
         }
     });
@@ -70,7 +66,7 @@ function upload_form() {
 
     const ext = image_name.substr((image_name.lastIndexOf('.') + 1));
 
-    if(ext==='jpg' || ext==='JPG' || ext==='jpeg' || ext==='JPEG' || ext==='png' || ext==='PNG' || ext==='gif' || ext==='ico' || ext==='ICO' || ext==='svg' || ext==='SVG'){
+    if(ext==='jpg' || ext==='JPG' || ext==='jpeg' || ext==='JPEG' || ext==='png' || ext==='PNG' || ext==='webp' || ext==='gif' || ext==='ico' || ext==='ICO' || ext==='svg' || ext==='SVG'){
 
         $.ajax({
 
@@ -139,12 +135,16 @@ function onMediaModalView(id) {
         url: window.location.origin + '/admin/getMediaById',
         data: 'id='+id,
         success: function (response) {
+            $("#RecordId").val(response.id);
+            $("#title").val(response.media_title);
+            $("#alternative_text").val(response.media_alt);
+            $("#thumbnail").val('/media/'+response.media_file);
 
-            const data = response;
-            $("#RecordId").val(data.id);
-            $("#title").val(data.media_title);
-            $("#alternative_text").val(data.media_alt);
-            $("#thumbnail").val('/media/'+data.media_file);
+            if(response.media_file != null){
+                $("#media_preview_img").html('<img class="max-h-fit max-w-lg mx-auto" src="/media/'+response.media_file+'" alt="'+response.media_title+'">');
+            }else{
+                $("#media_preview_img").html('');
+            }
         }
     });
 }

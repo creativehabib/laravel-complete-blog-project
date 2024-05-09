@@ -22,8 +22,8 @@
                     </div>
                 </li>
             </ul>
-            <button type="button" onClick="onFormPanel()" href="javascript:void(0);" class="font-semibold text-gray-500 dark:text-gray-400 btn-form float-right"><i class="fa fa-plus"></i> {{ __('Add New') }}</button>
-            <button type="button" onClick="onListPanel()" href="javascript:void(0);" class="font-semibold text-gray-500 dark:text-gray-400 btn-list float-right hidden"><i class="fa fa-reply"></i> {{ __('Back') }}</button>
+            <button type="button" onClick="onFormPanel()" class="font-semibold text-gray-500 dark:text-gray-400 btn-form float-right">{{ __('Add New') }}</button>
+            <button type="button" onClick="onListPanel()" class="font-semibold text-gray-500 dark:text-gray-400 btn-list float-right hidden">{{ __('Back') }}</button>
         </div>
     </x-slot>
 
@@ -50,132 +50,53 @@
             <!--/Upload Form-->
 
 
-
-
             <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach($media_datalist as $row)
                     <div class="cursor-pointer" id="media_item_{{ $row->id }}">
                         <a onClick="onMediaDelete({{ $row->id }})" class="absolute" title="{{ __('Delete') }}" href="javascript:void(0);">X</a>
-                        <a onClick="onMediaModalView({{ $row->id }})" href="javascript:void(0);"><img class="h-auto max-w-full shadow border rounded-lg" src="{{ asset('media/'.$row->media_file) }}" alt="{{ $row->media_alt }}"></a>
+                        <a onClick="onMediaModalView({{ $row->id }})" href="javascript:void(0);" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example"><img class="h-fit shadow border rounded-lg dark:border-gray-400" src="{{ asset('media/'.$row->media_file) }}" alt="{{ $row->media_alt }}"></a>
                     </div>
                 @endforeach
             </div>
-
-
-
-            <!--media modal view-->
-            <div class="modal"  id="media_modal_view">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{ __('Attachment Details') }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form novalidate="" data-validate="parsley" id="DataEntry_formId">
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div id="media_preview_img" class="media-preview-img"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="alternative_text">{{ __('Alternative Text') }}</label>
-                                                <input type="text" name="alternative_text" id="alternative_text" class="form-control parsley-validated" data-required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="title">{{ __('Title') }}</label>
-                                                <input type="text" name="title" id="title" class="form-control parsley-validated" data-required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="thumbnail">{{ __('Copy Link Thumbnail Image') }}</label>
-                                                <input type="text" name="thumbnail" id="thumbnail" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="RecordId" id="RecordId" />
-                            <div class="modal-footer">
-                                <a id="submit-form" href="javascript:void(0);" class="btn blue-btn">{{ __('Save') }}</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--/media modal view/-->
-
-
-            <div class="col-span-12 lg:col-span-6">
-                <div class="card dark:bg-zinc-800 dark:border-zinc-600">
-                    <div class="card-body border-b border-gray-100 dark:border-zinc-600">
-                        <h6 class="mb-1 text-gray-700 dark:text-gray-100">Form element modal</h6>
-                    </div>
-                    <div class="card-body">
-                        <button type="button" class="text-white btn bg-violet-500 border-violet-500 hover:bg-violet-600 focus:ring ring-violet-50focus:bg-violet-600" data-tw-toggle="modal" data-tw-target="#modal-id_form">Form element</button>
-
-                        <div class="relative z-50 hidden modal" id="modal-id_form" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                            <div class="fixed inset-0 z-50 overflow-y-auto">
-                                <div class="absolute inset-0 transition-opacity bg-black bg-opacity-50 modal-overlay"></div>
-                                <div class="p-4 mx-auto animate-translate sm:max-w-lg">
-                                    <div class="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl dark:bg-zinc-600">
-                                        <div class="bg-white dark:bg-zinc-700">
-                                            <button type="button" class="absolute top-3 right-2.5 text-gray-400 border-transparent hover:bg-gray-50/50 hover:text-gray-900 dark:text-gray-100 rounded-lg text-sm px-2 py-1 ltr:ml-auto rtl:mr-auto inline-flex items-center dark:hover:bg-zinc-600" data-tw-dismiss="modal">
-                                                <i class="text-xl text-gray-500 mdi mdi-close dark:text-zinc-100/60"></i>
-                                            </button>
-                                            <div class="p-5">
-                                                <h3 class="mb-4 text-xl font-medium text-gray-700 dark:text-gray-100">Sign in to minia</h3>
-                                                <form class="space-y-4" action="#">
-                                                    <div>
-                                                        <label for="media_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 ltr:text-left rtl:text-right">Your email</label>
-                                                        <input type="text" name="media_title" id="media_title" class="bg-gray-800/5 border border-gray-100 text-gray-900 dark:text-gray-100 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder-gray-400 dark:placeholder:text-zinc-100/60 focus:ring-0" required>
-                                                    </div>
-                                                    <div>
-                                                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 ltr:text-left rtl:text-right">Your password</label>
-                                                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-800/5 border border-gray-100 text-gray-900 dark:text-gray-100 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder-gray-400 dark:placeholder:text-zinc-100/60 focus:ring-0" required>
-                                                    </div>
-                                                    <div class="flex justify-between mt-5">
-                                                        <div class="flex items-start">
-                                                            <div class="flex items-center h-5">
-                                                                <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded ring-0 focus:ring-offset-0 dark:bg-zinc-700 dark:border-zinc-500 dark:checked:bg-violet-500" required>
-                                                            </div>
-                                                            <label for="remember" class="text-sm font-medium text-gray-900 ltr:ml-2 rtl:mr-2 dark:text-gray-100">Remember me</label>
-                                                        </div>
-                                                        <a href="#" class="text-sm font-medium text-violet-500 hover:text-violet-600 ">Forgot Password ?</a>
-                                                    </div>
-                                                    <div class="mt-6">
-                                                        <button type="submit" class="w-full text-white bg-red-600 border-transparent btn">Don't have an account ?</button>
-                                                    </div>
-                                                    <div class="mt-4 text-sm font-medium text-gray-500 dark:text-zinc-100/60 dark:text-gray-300">
-                                                        Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Signup now</a>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
+            {{ $media_datalist->links('pagination::tailwind') }}
         </div>
     </div>
+
+    <!-- drawer component -->
+    <div id="drawer-right-example" class="fixed top-0 right-0 shadow-md z-50 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+        <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Image Details</h5>
+        <button type="button" data-drawer-dismiss="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span class="sr-only">Close menu</span>
+        </button>
+        <div id="media_preview_img" class="mb-4"></div>
+        <form action="#" id="DataEntry_formId">
+            <div class="space-y-4">
+                <div>
+                    <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Media Title</label>
+                    <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                </div>
+                <div>
+                    <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Media Alt Text</label>
+                    <input type="text" name="alternative_text" id="alternative_text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Product brand" required="">
+                </div>
+                <div>
+                    <label for="thumbnail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Copy Image Link</label>
+                    <input type="text" name="thumbnail" id="thumbnail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                </div>
+
+                <div class="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4">
+                    <button type="submit" id="submit-form" class="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        Update
+                    </button>
+                    <button type="button" data-drawer-dismiss="drawer-right-example" aria-controls="drawer-right-example" class="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        <svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" name="RecordId" id="RecordId" />
+        </form>
+    </div>
+
 </x-app-layout>

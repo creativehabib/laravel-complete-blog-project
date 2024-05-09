@@ -26,7 +26,7 @@
     </select>
 </div>
 <div class="mt-5">
-    <label for="cat_image">Image Upload</label>
-    <input type="file" name="cat_image" class="w-full">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="cat_image">Image Upload</label>
+    <input value="{{old('cat_image', $category->cat_image)}}" name="cat_image" class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="cat_image" type="file">
 </div>
 
